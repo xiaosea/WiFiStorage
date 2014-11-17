@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--
+    Copyright 2011-2013 Pieter Pareit
+    Copyright 2009 David Revell
+
+    This file is part of SwiFTP.
+
+    SwiFTP is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SwiFTP is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SwiFTP.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lica.wifistorage">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <application
+        android:name=".FsApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name">
+
+        <activity android:name=".gui.MainActivity"
+            android:theme="@android:style/Theme.Holo.Light"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".gui.FsPreferenceActivity"
+            android:theme="@android:style/Theme.Holo.Light"
+            android:label="@string/settings_label"
+            android:exported="false"/>
+
+        <service android:name=".FsService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".gui.FsNotification"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.lica.wifistorage.FTPSERVER_STARTED" />
+                <action android:name="com.lica.wifistorage.FTPSERVER_STOPPED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".NsdService" />
+        <receiver
+            android:name=".NsdService$StartStopReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.lica.wifistorage.FTPSERVER_STARTED" />
+                <action android:name="com.lica.wifistorage.FTPSERVER_STOPPED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Don't export this receiver in free, this clashes with paid -->
+        <receiver
+            android:name=".RequestStartStopReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.lica.wifistorage.ACTION_START_FTPSERVER" />
+                <action android:name="com.lica.wifistorage.ACTION_STOP_FTPSERVER" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".gui.FsWidgetProvider"
+            android:exported="false"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.lica.wifistorage.FTPSERVER_STARTED" />
+                <action android:name="com.lica.wifistorage.FTPSERVER_STOPPED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <service android:name=".gui.FsWidgetProvider$UpdateService" />
+
+    </application>
+
+</manifest>

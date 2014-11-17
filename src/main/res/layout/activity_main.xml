@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:padding="10dip"
+	android:background="@drawable/bg_body">
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:gravity="center_vertical">
+		<TextView android:textColor="#FF000000" android:textSize="18sp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="@string/service_state"></TextView>
+		<TextView android:textColor="#FF000000" android:textSize="18sp"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:id="@+id/serviceStateTextView"
+			android:layout_marginLeft="5dip"></TextView>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="vertical"
+		android:padding="10dip">
+		<Button android:layout_height="wrap_content" android:id="@+id/startButton"
+			android:text="@string/start" android:layout_width="fill_parent"
+			android:background="@drawable/selector_button"
+			android:paddingTop="8dip"
+			android:textSize="16sp"
+            android:textColor="@android:color/primary_text_light"/>
+		<Button android:layout_height="wrap_content" android:id="@+id/stopButton"
+			android:text="@string/stop" android:layout_width="fill_parent"
+			android:background="@drawable/selector_button"
+			android:paddingTop="8dip"
+			android:textSize="16sp"
+            android:textColor="@android:color/primary_text_light"/>
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/settingButton"
+			android:text="@string/settings_label"
+			android:background="@drawable/selector_button"
+			android:paddingTop="8dip"
+			android:textSize="16sp"
+            android:textColor="@android:color/primary_text_light"/>
+	</LinearLayout>
+
+	<ScrollView
+	    android:id="@+id/logScrollView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@drawable/bg_log"
+	    android:fadingEdge="none"
+	    android:fadeScrollbars="false"
+	    android:scrollbars="vertical" >
+
+		<TextView android:layout_width="fill_parent" android:id="@+id/logTextView"
+			android:layout_height="wrap_content" android:padding="5dip"
+			android:singleLine="false" android:textColor="#FF000000"
+			android:textSize="13sp">
+		</TextView>
+	</ScrollView>
+</LinearLayout>
